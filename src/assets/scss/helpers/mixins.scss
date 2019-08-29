@@ -1,0 +1,77 @@
+// To edit Media queries for easier use in your scss use the Mixins Variables
+// ----- Mixin Breakpoints -----------------------------------------------------
+$mixinBreakpoints: (
+	// -- Grid Specific
+	"xs": 576px,
+	"sm": 768px,
+	"md": 992px,
+	"lg": 1200px,
+	// -- Custom Breakpoints
+  "phone":        400px,
+  "phone-wide":   480px,
+  "phablet":      560px,
+  "tablet-small": 640px,
+  "tablet":       768px,
+  "tablet-wide":  1024px,
+  "desktop":      1248px,
+  "desktop-wide": 1440px,
+	"desktop-4k": 2560px,
+	"desktop-4k-wide": 3000px,
+);
+
+// Add your SCSS Mixins here.
+// ----- Media Queries ---------------------------------------------------------
+// Note: -----------------------------------------------------------------------
+// Usage: --    @include mq('tablet-wide') {}
+// -----------------------------------------------------------------------------
+
+@mixin mq($width, $type: min) {
+  @if map_has_key($mixinBreakpoints, $width) {
+    $width: map_get($mixinBreakpoints, $width);
+      @if $type == max {
+        $width: $width - 1px;
+      }
+      @media only screen and (#{$type}-width: $width) {
+        @content;
+      }
+  }
+}
+
+// ----- Animation Mixins ------------------------------------------------------
+@mixin easeIn {
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+	   -o-transition: all 0.5s ease;
+	      transition: all 0.5s ease;
+}
+
+// ----- Hardware Accleration --------------------------------------------------
+@mixin hardware($backface: true, $perspective: 1000) {
+  @if $backface {
+    backface-visibility: hidden;
+  }
+  perspective: $perspective;
+}
+
+// ----- Trunication -----------------------------------------------------------
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ----- Pseudo Elements Basic 3 -----------------------------------------------
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+// ----- Full Page Background Cover --------------------------------------------
+@mixin cover {
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
