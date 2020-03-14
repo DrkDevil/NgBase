@@ -1,6 +1,7 @@
 # NgBase
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.1.
+## Change Log
+This project has been updated from Angular 8 to Angular 9
 
 ## Development server
 
